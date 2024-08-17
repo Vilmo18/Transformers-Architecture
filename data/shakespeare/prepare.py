@@ -41,7 +41,7 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 # train.bin has 301,966 tokens
 # val.bin has 36,059 tokens
 # save the meta information as well, to help us encode/decode later
-vocab_size = 30000
+vocab_size = 60000
 meta = {
     'vocab_size': vocab_size,
 }
