@@ -70,6 +70,7 @@ lr_decay_iters = 600000 # should be ~= max_iters per Chinchilla
 min_lr = 6e-5 # minimum learning rate, should be ~= learning_rate/10 per Chinchilla
 # DDP settings
 backend = 'nccl' # 'nccl', 'gloo', etc.
+ckpoint = 'ckpt.pt'
 # system
 device = 'cuda' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
 dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
@@ -284,8 +285,14 @@ while True:
                     'best_val_loss': best_val_loss,
                     'config': config,
                 }
-                print(f"saving checkpoint to {out_dir}")
-                torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
+                #print(f"saving checkpoint to {out_dir}")
+                #torch.save(checkpoint, os.path.join(out_dir, 'ckpt.pt'))
+
+                #ckpt_file_name='ckpt'
+                ckpt_file_name_with_iter = f"ckpt_iter_{iter_num}.pt"
+                ckpt_file_path = os.path.join(out_dir, ckpt_file_name_with_iter)
+                print(f"saving checkpoint to {ckpt_file_path}")
+                torch.save(checkpoint, ckpt_file_path)
     if iter_num == 0 and eval_only:
         break
 

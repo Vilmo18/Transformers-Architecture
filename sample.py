@@ -7,6 +7,7 @@ from contextlib import nullcontext
 import torch
 import tiktoken
 from model import GPTConfig, GPT
+from transformers import AutoTokenizer
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
@@ -69,9 +70,13 @@ if load_meta:
 else:
     # ok let's assume gpt-2 encodings by default
     print("No meta.pkl found, assuming GPT-2 encodings...")
-    enc = tiktoken.get_encoding("gpt2")
-    encode = lambda s: enc.encode(s, allowed_special={"<|endoftext|>"})
-    decode = lambda l: enc.decode(l)
+    #enc = tiktoken.get_encoding("gpt2")
+    #encode = lambda s: enc.encode(s, allowed_special={"<|endoftext|>"})
+    #decode = lambda l: enc.decode(l)
+
+    tokenizer = AutoTokenizer.from_pretrained("gpt2")
+    encode = lambda s: tokenizer.encode(s, add_special_tokens=False)
+    decode = lambda l: tokenizer.decode(l)
 
 # encode the beginning of the prompt
 if start.startswith('FILE:'):
