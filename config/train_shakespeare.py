@@ -24,7 +24,7 @@ n_head = 12
 n_embd = 768
 dropout = 0.2
 
-gradient_accumulation_steps = 5 * 8
+gradient_accumulation_steps = 2 * 8
 
 # this makes total number of tokens be 300B
 max_iters = 600000
