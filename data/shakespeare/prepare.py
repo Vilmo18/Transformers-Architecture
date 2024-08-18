@@ -1,5 +1,6 @@
 import os
 import requests
+from datasets import DatasetDict, Dataset
 #import tiktoken
 from transformers import AutoTokenizer
 import numpy as np
@@ -7,6 +8,38 @@ import pickle
 from transformers import GPT2Tokenizer
 from tqdm import tqdm
 from datasets import load_dataset
+import re
+
+def clean_text(text):
+    # Supprimer les emojis
+    emoji_pattern = re.compile(
+        "["
+        u"\U0001F600-\U0001F64F"  # emoticônes
+        u"\U0001F300-\U0001F5FF"  # symboles & pictogrammes
+        u"\U0001F680-\U0001F6FF"  # transports & symboles cartographiques
+        u"\U0001F700-\U0001F77F"  # symboles alchimiques
+        u"\U0001F780-\U0001F7FF"  # autres symboles & pictogrammes
+        u"\U0001F800-\U0001F8FF"  # autres symboles & pictogrammes (2)
+        u"\U0001F900-\U0001F9FF"  # symboles supplémentaires & pictogrammes
+        u"\U0001FA00-\U0001FA6F"  # autres symboles supplémentaires
+        u"\U0001FA70-\U0001FAFF"  # autres symboles supplémentaires (2)
+        u"\U00002702-\U000027B0"  # symboles divers
+        u"\U000024C2-\U0001F251"
+        "]+", flags=re.UNICODE
+    )
+    text = emoji_pattern.sub(r'', text)
+
+    # Supprimer les caractères non identifiés (si par exemple ce sont des caractères non ASCII)
+    text = re.sub(r'[^\x00-\x7F]+', '', text)
+
+    return text
+
+def clean_dataset(dataset):
+    return dataset.map(lambda x: {'article': clean_text(x['article']),
+                                  'highlights': clean_text(x['highlights'])},num_proc=8)
+
+
+
 
 # download the tiny shakespeare dataset
 input_file_path = os.path.join(os.path.dirname(__file__), 'input.txt')
@@ -16,6 +49,14 @@ if not os.path.exists(input_file_path):
         f.write(requests.get(data_url).text)
 
 repo = load_dataset("YvanCarre/cnn-news-anonymised")
+
+
+# Appliquer le nettoyage à chaque partition du dataset
+repo = DatasetDict({
+    'train': clean_dataset(repo['train']),
+    'validation': clean_dataset(repo['validation']),
+    'test': clean_dataset(repo['test'])
+})
 
 with open(input_file_path, "w") as corpus:
     for dataset_name in repo: 
