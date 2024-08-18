@@ -55,9 +55,9 @@ val_ids.tofile(os.path.join(os.path.dirname(__file__), 'val.bin'))
 # train.bin has 301,966 tokens
 # val.bin has 36,059 tokens
 # save the meta information as well, to help us encode/decode later
-# vocab_size = 50000
-# meta = {
-#     'vocab_size': vocab_size,
-# }
-# with open(os.path.join(os.path.dirname(__file__), 'meta.pkl'), 'wb') as f:
-#     pickle.dump(meta, f)
+vocab_size = 32001
+meta = {
+    'vocab_size': vocab_size,
+}
+with open(os.path.join(os.path.dirname(__file__), 'meta.pkl'), 'wb') as f:
+    pickle.dump(meta, f)
