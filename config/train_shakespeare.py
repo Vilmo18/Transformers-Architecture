@@ -10,8 +10,8 @@ log_interval = 10 # don't print too too often
 always_save_checkpoint = False
 
 wandb_log = False # override via command line if you like
-wandb_project = 'gpt-wenty'
-wandb_run_name = 'mini-gpt'
+wandb_project = 'gpt2-wenty'
+wandb_run_name = 'cnn'
 
 dataset = 'shakespeare'
 #gradient_accumulation_steps = 1
