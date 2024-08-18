@@ -24,7 +24,7 @@ n_head = 6
 n_embd = 384
 dropout = 0.1
 
-gradient_accumulation_steps = 8
+gradient_accumulation_steps = 10
 
 # this makes total number of tokens be 300B
 max_iters = 600000
@@ -39,7 +39,7 @@ lr_decay_iters = 600000
 weight_decay = 1e-1
 
 
-learning_rate = 4e-5 # with baby networks can afford to go a bit higher
+learning_rate = 1e-5 # with baby networks can afford to go a bit higher
 max_iters = 5000
 lr_decay_iters = 5000 # make equal to max_iters usually
 #min_lr = 1e-4 # learning_rate / 10 usually
