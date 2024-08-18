@@ -54,7 +54,7 @@ repo = load_dataset("YvanCarre/cnn-news-anonymised")
 # Appliquer le nettoyage à chaque partition du dataset
 repo = DatasetDict({
     'train': clean_dataset(repo['train']),
-    'validation': clean_dataset(repo['validation']),
+    'val': clean_dataset(repo['validation']),
     'test': clean_dataset(repo['test'])
 })
 
