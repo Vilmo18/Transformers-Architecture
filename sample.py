@@ -74,7 +74,7 @@ else:
     #encode = lambda s: enc.encode(s, allowed_special={"<|endoftext|>"})
     #decode = lambda l: enc.decode(l)
 
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
+    tokenizer = AutoTokenizer.from_pretrained("YvanCarre/anonym-tokenizer")
     encode = lambda s: tokenizer.encode(s, add_special_tokens=False)
     decode = lambda l: tokenizer.decode(l)
 

@@ -10,13 +10,13 @@ log_interval = 10 # don't print too too often
 always_save_checkpoint = False
 
 wandb_log = False # override via command line if you like
-wandb_project = 'shakespeare'
+wandb_project = 'gpt-wenty'
 wandb_run_name = 'mini-gpt'
 
 dataset = 'shakespeare'
 #gradient_accumulation_steps = 1
 batch_size = 64
-block_size = 256 # context of up to 256 previous characters
+block_size = 512 # context of up to 256 previous characters
 
 # baby GPT model :)
 n_layer = 6
@@ -39,7 +39,7 @@ lr_decay_iters = 600000
 weight_decay = 1e-1
 
 
-learning_rate = 1e-5 # with baby networks can afford to go a bit higher
+learning_rate = 2e-5 # with baby networks can afford to go a bit higher
 max_iters = 5000
 lr_decay_iters = 5000 # make equal to max_iters usually
 #min_lr = 1e-4 # learning_rate / 10 usually
