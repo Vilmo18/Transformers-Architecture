@@ -76,7 +76,7 @@ else:
 
     tokenizer = AutoTokenizer.from_pretrained("YvanCarre/anonym-tokenizer")
     encode = lambda s: tokenizer.encode(s, add_special_tokens=False)
-    decode = lambda l: tokenizer.decode(l)
+    decode = lambda l: tokenizer.decode(l,skip_special_tokens=True)
 
 # encode the beginning of the prompt
 if start.startswith('FILE:'):
