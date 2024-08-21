@@ -22,7 +22,7 @@ block_size = 1024 # context of up to 256 previous characters
 n_layer = 12
 n_head = 12
 #n_embd = 384
-dropout = 0.1
+#dropout = 0.1
 
 gradient_accumulation_steps = 5
 
@@ -39,7 +39,7 @@ lr_decay_iters = 600000
 weight_decay = 1e-1
 
 
-learning_rate = 2e-5 # with baby networks can afford to go a bit higher
+#learning_rate = 2e-5 # with baby networks can afford to go a bit higher
 max_iters = 5000
 lr_decay_iters = 5000 # make equal to max_iters usually
 #min_lr = 1e-4 # learning_rate / 10 usually
